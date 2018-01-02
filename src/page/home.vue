@@ -134,6 +134,8 @@ export default {
     box-sizing: border-box;
   }
   .personalInfo {
+    position: sticky;
+    top:60px;
     margin-top:20px;
     font-size:15px;
     color:#8590a6;

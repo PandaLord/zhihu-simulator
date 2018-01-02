@@ -114,6 +114,6 @@ export default {
       height:50px;
       top:0;
       left:0;
-      z-index:9999999;
+      z-index:1000;
   }
 </style>

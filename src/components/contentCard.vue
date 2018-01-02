@@ -15,39 +15,38 @@
           </p>  
       </div>
       <div class='interactArea'>
-          <div class='commentButtons'>
-              <mt-button plain class='commentButton upButton'>   
+        <div class="commentArea">
+          <div class="commentButtonArea">
+            <mt-button plain class='commentButton upButton'>   
                   <img slot="icon" src='../static/image/icons/uparrow.png' />
-                  {{data.answer.upCommentsNum}}
+                  {{convertNum(data.answer.upCommentsNum)}}
               </mt-button>
               <mt-button plain class='commentButton downButton'>
                   <img slot="icon" src='../static/image/icons/downarrow.png' />
               </mt-button>
           </div>
-          <div class='comments'>
-              <mt-button plain @click='toggleComments' class='showCommentsButton'>
-                  <img slot="icon" src='../static/image/icons/Comment_16px.png' />
-                  {{ commentsToggle }} 
-              </mt-button>
-          </div>
-          <div class='share'>
+          <mt-button plain @click='toggleComments' class='showCommentsButton'>
+              <img slot="icon" src='../static/image/icons/Comment_16px.png' />
+              {{ commentsToggle(convertNum(data.answer.comments.length)) }} 
+          </mt-button>
+        </div>
+        <div class="actionArea">       
               <mt-button plain class='shareButton'>
                   <img slot="icon" src='../static/image/icons/Share_16px.png' />
                   分享
               </mt-button>
-          </div>
-          <div class='collections'>
               <mt-button plain class='collectButton'>
                   <img slot="icon" src='../static/image/icons/Favorite_16px.png' />
                   收藏
               </mt-button>
-          </div>
-          <div class='appreciate'> 
               <mt-button plain class='appreciateButton'>
                   <img slot="icon" src='../static/image/icons/Thank_16px.png' />
                   感谢
               </mt-button>
-          </div>
+              <mt-button plain class="moreButton">
+                  <img slot="icon" src='../static/image/icons/More_16px.png' /> 
+              </mt-button>
+        </div> 
       </div>
       <div class="commentArea" v-show="isShow">
         <comment-card
@@ -76,14 +75,7 @@ export default {
       }
   },
   computed: {
-    commentsToggle () {
-        if (!this.isShow) {
-          return this.data.answer.comments.length + ' 条评论'
-         } else {
-            return '收起评论'
-          }
-      }
-
+    
   },
   components: {
     commentCard
@@ -91,17 +83,28 @@ export default {
   methods: {
       toggleComments () {
         this.isShow = !this.isShow
+      },
+      convertNum (num) {
+          if (num > 1000) {
+              return Number.parseFloat(num/1000).toFixed(1) + "K"
+          }
+            return num
+      },
+      commentsToggle (text) {
+        if (!this.isShow) {
+          return text + ' 条评论'
+         } else {
+            return '收起评论'
+          }
       }
+
   }
 }
 </script>
 <style lang="less" scoped>
-
-  .commentArea {
-      width:100%;
-      height: auto;
-      background-color:#fff;
-  }
+  @fontColor:#2d84cc;
+  @bColor:#fff;
+  @commendButtonColor:#ebf3fb;
 
   .answerTitle {
     font-size:25px;
@@ -109,37 +112,54 @@ export default {
     display:block;
     text-decoration: none;
     &:visited {
-      color:black;
+      color:#000;
     }
   }
 
   .extendAnchor {
-    color:blue;
+    color:@fontColor;
     text-decoration: none;
     
   }
   .interactArea {
-    display:inline-flex;
+    display:flex;
     width:100%;
+    height:30px;
     white-space: nowrap;
-    .commentButtons,
-    .comments,
-    .share,
-    .collections,
-    .appreciate {
-      flex:1 1 auto;
-    }  
+    justify-content: flex-start;
+    align-items: center;
+    padding:10px 20px;
+    margin:0 -20px;
+    .commentArea,
+    .actionArea {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex:0 1 36%;
+    }
+    .commentArea {
+      width:20%;
+    }
+    .commentButtonArea {
+      display:inline-flex;
+      justify-content:space-between;
+      .commentButton {
+        background-color:@commendButtonColor;
+      }
+      .downButton {
+        flex:0 1 auto;
+        margin-left:10px;
+      }
+    } 
   }
-  .commentArea {
-    width:100%,
-
-  }
+  
   .commentButton,
   .showCommentsButton,
   .shareButton,
   .appreciateButton,
-  .collectButton {
-    color: #2d84cc;
+  .collectButton,
+  .moreButton {
+    color: @fontColor;
     border:none;
     font-size:15px;
     cursor: pointer;
@@ -149,7 +169,7 @@ export default {
   }
   .closeComment {
       position: fixed;
-      bottom:30 px;
+      bottom:30px;
       left:60%;
       &::after {
           background-color: transparent;

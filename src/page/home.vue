@@ -2,7 +2,12 @@
   <div class="viewport">
     <myHeader></myHeader>
     <div class="contentArea">
-      <div class="leftContentArea">
+      <div v-if="!dataReceived" class="noContentArea">
+        <h3 class="loading">
+          正在加载，请稍后...
+        </h3>
+      </div>
+      <div v-else class="leftContentArea">
         <content-card
         v-for="(user,index) in userData"
         :key="index"
@@ -84,13 +89,15 @@ export default {
   name: 'Home',
   data () {
     return {
-      userData: []
+      userData: [],
+      dataReceived: false
     }
   },
   created () {
     axios.get('http://user.cn/')
       .then(res => {
         this.userData = res.data.related
+        this.dataReceived = !this.dataReceived
       })
   },
   components: {
@@ -105,7 +112,7 @@ export default {
     margin:0;
     padding:0;
   }
-  .contentArea {
+  .contentArea{
     display:flex;
     width:900px;
     height:100%;
@@ -114,9 +121,25 @@ export default {
     
   }
   .leftContentArea,
-  .rightContentArea{
+  .rightContentArea,
+  .noContentArea {
     margin-top:70px;
   }
+  .noContentArea {
+    width:700px;
+    height:99999px;
+    background-image:url('../static/image/pics/registerBackground.png');
+    background-color:rgba(255,255,255,0.4);
+    text-align: center;
+    .loading {
+    display: inline-block;
+    margin:50% auto;
+    font-size:35px;
+
+    }
+
+  }
+  
 
   .rightContentArea {
     margin-left:30px;

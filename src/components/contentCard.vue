@@ -112,8 +112,8 @@ export default {
     commentCard
   },
   created () {
-    $('.upButton').prop('value', false)
-    $('.downButton').prop('value', false)
+    $('.upButton').attr('value', false)
+    $('.downButton').attr('value', false)
   },
 
   methods: {
@@ -145,24 +145,25 @@ export default {
         let ob = cb.siblings()
         // ct是当前按钮的属性（字符串格式），bool是转化为布尔，newct是相反的按钮属性
         // ot,obool,newot同理
-        let ct = cb.prop('value')
+        let ct = cb.attr('value')
+        console.log(ct)
         let bool = ct === 'false'
         let newct = ct === 'false'
         ? 'true' : 'false'
-        let ot = ob.prop('value')
+        let ot = ob.attr('value')
         let obool = ot === 'false'
         let newot = ot === 'false'
         ? 'true' : 'false'
-        if (!bool) {
+        if (bool) {
           console.log('当前按钮无状态')
           cb.css('backgroundColor', '#2d84cc')
           cb.css('color', '#e4ebf3')
           console.log('当前点击按钮从无状态变为有状态')
-          if (obool) {
+          if (!obool) {
             console.log('其他按钮有状态')
             ob.css('backgroundColor', '#e4ebf3')
             ob.css('color', '#2d84cc')
-            ob.prop('value', newot)
+            ob.attr('value', newot)
             console.log('其他按钮切换为无状态')
           }
         } else {
@@ -171,7 +172,7 @@ export default {
           cb.css('color', '#2d84cc')
           console.log('当前按钮切换为无状态')
         }
-        cb.prop('value', newct)
+        cb.attr('value', newct)
       }
   }
 }

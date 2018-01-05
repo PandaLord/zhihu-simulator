@@ -21,19 +21,19 @@
               <span class="storySideBar-ListItem-Icon">
                 <img src="../static/image/icons/lightning.png" /> 
               </span>
-              <span class="storySideBar-ListItem-Anchor">Live</span>
+              <span class="storySideBar-ListItem-Anchor-Live">Live</span>
             </li>
             <li class="storySideBar-ListItem">
               <span class="storySideBar-ListItem-Icon">
                 <img src="../static/image/icons/bookstore.png"/> 
               </span>
-              <span class="storySideBar-ListItem-Anchor">书店</span>
+              <span class="storySideBar-ListItem-Anchor-Store">书店</span>
             </li>
             <li class="storySideBar-ListItem">
               <span class="storySideBar-ListItem-Icon">
                 <img src="../static/image/icons/table.png" /> 
               </span>
-              <span class="storySideBar-ListItem-Anchor">圆桌</span>
+              <span class="storySideBar-ListItem-Anchor-Table">圆桌</span>
             </li>
           </ul>
           <ul class="storySideBar-List">
@@ -41,13 +41,13 @@
               <span class="storySideBar-ListItem-Icon">
                 <img src="../static/image/icons/pen.png" /> 
               </span>
-              <span class="storySideBar-ListItem-Anchor">专栏</span>
+              <span class="storySideBar-ListItem-Anchor-Zhuanlan">专栏</span>
             </li>
             <li class="storySideBar-ListItem">
               <span class="storySideBar-ListItem-Icon">
                 <img src="../static/image/icons/consult.png"/> 
               </span>
-              <span class="storySideBar-ListItem-Anchor">咨询</span>
+              <span class="storySideBar-ListItem-Anchor-Consult">咨询</span>
             </li>
           </ul>
         </div>
@@ -139,7 +139,34 @@ export default {
     }
 
   }
-  
+  .storySideBar-ListItem-Anchor-Live {
+    &:hover {
+      color:#ffcf00;
+    }
+  }
+  .storySideBar-ListItem-Anchor-Store {
+    &:hover {
+      color: #43d480;
+    }
+  }
+  .storySideBar-ListItem-Anchor-Table {
+    &:hover {
+      color: #0084ff;
+    }
+  }
+  .storySideBar-ListItem-Anchor-Zhuanlan {
+    &:hover {
+      color: #0f88eb;
+    }
+  }
+  .storySideBar-ListItem-Anchor-Store {
+    &:hover {
+      color: #5478f0;
+    }
+  }
+  .storySideBar-ListItem {
+    cursor:pointer;
+  }
 
   .rightContentArea {
     margin-left:30px;
